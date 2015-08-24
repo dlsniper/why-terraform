@@ -1,0 +1,136 @@
+Terraform
+A cross-provider, cross-platform way to manage your infrastructure
+19:00 24 Aug 2015
+Tags: terraform, aws, infrastructure, cloud, go, automation
+
+Florin Patan
+Senior Software Engineer, Tapglue
+florinpatan@gmail.com
+http://florinpatan.ro/
+@dlsniper
+
+
+* Who am I?
+
+My name is Florin.
+
+Writing software for ~10 years.
+
+I've heard about a thing called cloud ~5 years ago.
+
+I'm a Senior Software Engineer at Tapglue.
+
+Co-organizer for AWS and Go meetups in Berlin.
+
+
+* Agenda
+
+- The "before"
+- The state of art in the landscape
+- Terrafom
+- LIVE! demo
+- The Dark Side
+- Status quo
+- Future
+
+Q&A can be addressed during the talk or at the end.
+
+* The "before"
+
+We have a software.
+
+We need to run it somewhere, AWS looks like a good choice.
+
+Yaaay, it works on a server, can I has cloud?
+
+* The state of art in the landscape
+
+- CloudFormation
+
+Creating a EC2 instance:
+
+  "MyInstance" : {
+   "Type" : "AWS::EC2::Instance",
+   "Properties" : {
+       "AvailabilityZone" : "us-east-1a",
+       "ImageId" : "ami-20b65349"
+   }
+  }
+
+Others:
+
+- Cloud Foundry
+- Heat (OpenStack)
+- ... ?
+
+All too complicated examples to fit a slide.
+
+* The state of art in the landscape
+
+So...
+
+.image json-everywhere.jpg
+
+* Terraform
+
+.image terraform.png 500 0
+
+* Terraform
+
+Turns out HashiCorp (the guys behind Vagrant) are working on a tool for this.
+
+Creating a EC2 instance:
+
+  # Create a new instance of the ami-20b65349 on an m1.small node
+  # with an AWS Tag naming it "Hello Terraform"
+  resource "aws_instance" "web" {
+      ami = "ami-20b65349"
+      instance_type = "m1.small"
+      tags {
+          Name = "Hello Terraform"
+      }
+  }
+
+* LIVE! demo
+
+* The Dark Side
+
+AWS API is complex:
+
+- there are about 1696 different options
+- Terraform covers only 294 options (1402 API options not covered)
+
+You have to learn a different language (HCL).
+
+* Status quo
+
+The whole infrastructure has:
+- ~1400 lines of "code"
+- ~70 Terraform resources
+- 18 files (17 config + 1 variables)
+
+We have a good split of roles / configurations across files.
+
+Things look easy to maintain.
+
+We use AWS and CloudFlare.
+
+* Future
+
+Try out Atlas.
+
+Experiment with automation around Terraform.
+
+Contribute to Terraform.
+
+* Q&A
+
+* Resources
+
+Terraform:
+
+.link https://www.terraform.io
+
+Slides are here:
+
+.link http://goo.gl/xOXMBt
